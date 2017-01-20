@@ -98,7 +98,12 @@ class Viptela(object):
         url = '{0}/device/tunnel/statistics'.format(self.base_url)
         params = {"deviceId": device_uuid}
         response = self._get(url, params).json()
-        print response
+        if "error" in response:
+            print "{}: {}".format(response["error"]["message"],
+                                  response["error"]["details"])
+
+            return []
+
         try:
             return response["data"]
 
