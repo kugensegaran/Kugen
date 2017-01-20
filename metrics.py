@@ -13,6 +13,7 @@ def get_metrics(event, context):
     VIPTELA_SERVER = "54.251.162.192"
     vip_cli = Viptela(VIPTELA_USERNAME, VIPTELA_PSWD, VIPTELA_SERVER)
     data = vip_cli.get_device_metrics(event["resource"]["provider_id"])
+    print data
     print "Fetched %d data samples from Viptela" % len(data)
     if data:
         return list(format_metrics(data))
