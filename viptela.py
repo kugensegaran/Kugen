@@ -105,7 +105,6 @@ class Viptela(object):
             return []
 
         try:
-            print response
             return response["data"]
 
         except KeyError:
