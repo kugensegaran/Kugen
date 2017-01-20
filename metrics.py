@@ -29,7 +29,7 @@ def format_metrics(data):
 def format_sample(sample):
     metrics = []
     ts = time.strftime("%Y-%m-%dT%H:%M:%S.%fZ",
-                       str(sample.get("lastupdated")))
+                       sample.get("lastupdated"))
     for metric_name, cmp_metric_name in MAPPING.iteritems():
         metrics.append({
             "metric": cmp_metric_name % sample.get("dest-ip"),
