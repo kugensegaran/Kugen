@@ -1,5 +1,5 @@
+from datetime import datetime
 from viptela import Viptela
-import time
 
 MAPPING = {
     "rx_pkts": "network-in-packets.%s.cntr",
@@ -28,14 +28,13 @@ def format_metrics(data):
 
 def format_sample(sample):
     metrics = []
-    ts = time.strftime("%Y-%m-%dT%H:%M:%S.%fZ",
-                       sample.get("lastupdated"))
+    ts = datetime.fromtimestamp(sample.get("lastupdated") / 1e3)
     for metric_name, cmp_metric_name in MAPPING.iteritems():
         metrics.append({
             "metric": cmp_metric_name % sample.get("dest-ip"),
             "value": sample.get(metric_name),
             "unit": "packets/s",
-            "time": ts,
+            "time": ts.strftime("%Y-%m-%dT%H:%M:%S.%fZ"),
         })
 
     return metrics
