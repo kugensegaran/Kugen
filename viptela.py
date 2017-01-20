@@ -50,7 +50,7 @@ class Viptela(object):
         self.vmanage_server_port = vmanage_server_port
         self.verify = verify
 
-        self.base_url = 'https://{0}/dataservice'.format(
+        self.base_url = 'https://{0}:{1}/dataservice'.format(
             self.vmanage_server, self.vmanage_server_port
         )
 
