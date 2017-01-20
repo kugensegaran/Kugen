@@ -17,7 +17,7 @@ def get_metrics(event, context):
     if data:
         metrics = list(format_metrics(data))
         return {
-            "last_update": metrics[-1]["ts"],
+            "last_update": metrics[-1]["time"],
             "metrics": metrics,
         }
 
