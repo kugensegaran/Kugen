@@ -95,7 +95,7 @@ class Viptela(object):
             raise Exception("No data fetched from Viptela")
 
     def get_device_metrics(self, device_uuid):
-        url = 'device/tunnel/statistics'
+        url = '{0}/device/tunnel/statistics'.format(self.base_url)
         params = {"deviceId": device_uuid}
         response = self._get(url, params).json()
         try:
