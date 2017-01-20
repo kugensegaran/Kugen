@@ -20,13 +20,16 @@ class Viptela(object):
     def parse_response():
         pass
 
-    def _get(self, url, headers=None):
+    def _get(self, url, params=None, headers=None):
+        if params is None:
+            params = {}
+
         if headers is None:
             headers = {
                 'Connection': 'keep-alive',
                 'Content-Type': 'application/json'
             }
-        return self.session.get(url=url, headers=headers)
+        return self.session.get(url=url, params=params, headers=headers)
 
     def _put(self, url, headers, data):
         return self.session.put(url=url, headers=headers, data=data)
@@ -85,6 +88,16 @@ class Viptela(object):
     def get_device_maps(self):
         url = '{0}/group/map/devices'
         response = self._get(url).json()
+        try:
+            return response["data"]
+
+        except KeyError:
+            raise Exception("No data fetched from Viptela")
+
+    def get_device_metrics(self, device_uuid):
+        url = 'device/tunnel/statistics'
+        params = {"deviceId": device_uuid}
+        response = self._get(url, params).json()
         try:
             return response["data"]
 

@@ -1,7 +1,11 @@
 # Nflex Training demo script
 from datetime import datetime
-from uuid import uuid4
 from viptela import Viptela
+from metrics import get_metrics
+
+
+def get_metrics(event, context):
+    return metrics.get_metrics(event, context)
 
 
 def get_resources(event, context):
