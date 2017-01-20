@@ -28,7 +28,7 @@ def format_resource(resource):
             'name': resource.get("host-name"),
             'provider_created_at': datetime.utcnow().isoformat() + "Z"
         },
-        'id': str(uuid4()),
+        'id': resource.get("deviceIP"),
         'type': 'server',
         'details': {
             'server': {
